@@ -6,6 +6,7 @@ type State = {
     pageCount: number
     searchTerm: string
     searchValue: string
+    orderBy: string
 }
 
 type Actions = {
@@ -19,7 +20,8 @@ const initialState = {
     pageSize: 12,
     pageCount: 1,
     searchTerm: '',
-    searchValue: ''
+    searchValue: '',
+    orderBy: 'make'
 }
 
 export const useParamStore = createWithEqualityFn<State & Actions>()((set) => ({
