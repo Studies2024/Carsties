@@ -53,7 +53,7 @@ export default function Filters() {
     <div className="flex justify-between items-center mb-4">
       <div>
         <span className="uppercase text-sm text-gray-500 mr-2">Filter by</span>
-        <Button.Group>
+        <ButtonGroup>
           {filterButtons.map(({ label, icon: Icon, value }) => (
             <Button
               key={value}
@@ -64,7 +64,7 @@ export default function Filters() {
               {label}
             </Button>
           ))}
-        </Button.Group>
+        </ButtonGroup>
       </div>
 
       <div>

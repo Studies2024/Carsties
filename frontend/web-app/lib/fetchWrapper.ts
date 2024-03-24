@@ -64,7 +64,7 @@ async function handleResponse(response: Response) {
             status: response.status,
             message: response.statusText
         }
-        return {error}
+        return { error }
     }
 }
 
