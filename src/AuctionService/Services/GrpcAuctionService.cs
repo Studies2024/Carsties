@@ -15,7 +15,6 @@ public class GrpcAuctionService(AuctionDbContext dbContext) : GrpcAuction.GrpcAu
         
         var response = new GrpcAuctionResponse
         {
-            //Status = GrpcAuctionResponse.Types.Status.Success,
             Auction = new GrpcAuctionModel
             {
                 AuctionEnd = auction.AuctionEnd.ToString(),
