@@ -92,6 +92,7 @@ public class BidsController : ControllerBase
         var auction = await DB.Find<Auction>().OneAsync(auctionId);
         if (auction == null)
         {
+            Console.WriteLine($"=====> No bids found for {auctionId} auction");
             return NotFound();
         }
 
@@ -99,6 +100,8 @@ public class BidsController : ControllerBase
             .Match(b => b.AuctionId == auctionId)
             .Sort(b => b.Descending(x => x.BidTime))
             .ExecuteAsync();
+
+        Console.WriteLine($"=====> Found {bids.Count} bids for {auctionId} auction");
 
         return bids.Select(_mapper.Map<BidDto>).ToList();
     }
