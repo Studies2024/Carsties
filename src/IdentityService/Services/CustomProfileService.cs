@@ -18,7 +18,16 @@ public class CustomProfileService : IProfileService
     public async Task GetProfileDataAsync(ProfileDataRequestContext context)
     {
         var user = await _userManager.GetUserAsync(context.Subject);
+        if (user == null)
+        {
+            throw new ArgumentException("User is null in ProfileDataRequestContext");
+        }
         var existingClaims = await _userManager.GetClaimsAsync(user);
+
+        if(user.UserName is null)
+        {
+            throw new ArgumentException("User name is null in ProfileDataRequestContext");
+        }
 
         var claims = new List<Claim>
         {
@@ -26,8 +35,11 @@ public class CustomProfileService : IProfileService
         };
 
         context.IssuedClaims.AddRange(claims);
-        context.IssuedClaims.Add(existingClaims.FirstOrDefault(x => x.Type == JwtClaimTypes.Name));
-
+        var existing = existingClaims.FirstOrDefault(x => x.Type == JwtClaimTypes.Name);
+        if (existing != null)
+        {
+            context.IssuedClaims.Add(existing);
+        }
     }
 
     public Task IsActiveAsync(IsActiveContext context)

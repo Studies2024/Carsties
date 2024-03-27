@@ -1,6 +1,7 @@
 "use client";
 
 import { placeBidForAuction } from "@/app/actions/auctionActions";
+import { numberWithCommas } from "@/app/lib/numberWithComma";
 import { useBidStore } from "@/hooks/useBidStore";
 import React from "react";
 import { FieldValue, FieldValues, useForm } from "react-hook-form";
@@ -21,6 +22,13 @@ export default function BidForm({ auctionId, highBid }: Props) {
   const addBid = useBidStore((state) => state.addBid);
 
   function onSubmit(data: FieldValues) {
+    if (data.amount <= highBid) {
+      reset();
+      return toast.error(
+        "Your bid must be at least $" + numberWithCommas(highBid + 1)
+      );
+    }
+
     placeBidForAuction(auctionId, +data.amount)
       .then((bid) => {
         if (bid.error) throw bid.error;
