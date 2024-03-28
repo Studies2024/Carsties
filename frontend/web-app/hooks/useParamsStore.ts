@@ -30,15 +30,15 @@ const initialState: State = {
     winner: undefined
 }
 
-export const useParamsStore = create<State & Actions>()((set) => ({
+export const useParamsStore = createWithEqualityFn<State & Actions>()((set) => ({
     ...initialState,
 
     setParams: (newParams: Partial<State>) => {
         set((state) => {
             if (newParams.pageNumber) {
-                return {...state, pageNumber: newParams.pageNumber}
+                return { ...state, pageNumber: newParams.pageNumber }
             } else {
-                return {...state, ...newParams, pageNumber: 1}
+                return { ...state, ...newParams, pageNumber: 1 }
             }
         })
     },
@@ -46,6 +46,6 @@ export const useParamsStore = create<State & Actions>()((set) => ({
     reset: () => set(initialState),
 
     setSearchValue: (value: string) => {
-        set({searchValue: value})
+        set({ searchValue: value })
     }
 }))
