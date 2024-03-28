@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useParamStore } from "@/hooks/useParamStore";
+import { useParamsStore } from "@/hooks/useParamsStore";
 import { Button } from "flowbite-react";
 import Heading from "./Heading";
 import { signIn } from "next-auth/react";
@@ -21,7 +21,7 @@ export default function EmptyFilter({
   showLogin,
   callbackUrl,
 }: Props) {
-  const reset = useParamStore((state) => state.reset);
+  const reset = useParamsStore((state) => state.reset);
   return (
     <div className="h-[40vh] flex flex-col gap-2 justify-center items-center shadow-lg">
       <Heading title={title} subtitle={subtitle} center />

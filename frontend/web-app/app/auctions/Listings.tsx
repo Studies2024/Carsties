@@ -6,7 +6,7 @@ import AppPagination from "../components/AppPagination";
 import { getData } from "../actions/auctionActions";
 import { Auction, PagedResult } from "@/types";
 import Filters from "./Filters";
-import { useParamStore } from "@/hooks/useParamStore";
+import { useParamsStore } from "@/hooks/useParamsStore";
 import { shallow } from "zustand/shallow";
 import qs from "query-string";
 import EmptyFilter from "../components/EmptyFilter";
@@ -26,7 +26,7 @@ export default function Listings() {
 
   const setData = useAuctionStore((state) => state.setData);
 
-  const params = useParamStore(
+  const params = useParamsStore(
     (state) => ({
       pageNumber: state.pageNumber,
       pageSize: state.pageSize,
@@ -39,7 +39,7 @@ export default function Listings() {
     shallow
   );
 
-  const setParams = useParamStore((state) => state.setParams);
+  const setParams = useParamsStore((state) => state.setParams);
   const url = qs.stringifyUrl({ url: "", query: params });
 
   function setPageNumber(pageNumber: number) {
@@ -51,7 +51,7 @@ export default function Listings() {
       setData(data);
       setLoading(false);
     });
-  }, [url]);
+  }, [url, setData]);
 
   if (loading) return <h3>Loading...</h3>;
 

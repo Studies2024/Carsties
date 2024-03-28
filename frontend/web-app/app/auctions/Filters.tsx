@@ -1,4 +1,4 @@
-import { useParamStore } from "@/hooks/useParamStore";
+import { useParamsStore } from "@/hooks/useParamsStore";
 import { Button, ButtonGroup } from "flowbite-react";
 import React from "react";
 import { AiOutlineClockCircle, AiOutlineSortAscending } from "react-icons/ai";
@@ -44,16 +44,16 @@ const filterButtons = [
 ];
 
 export default function Filters() {
-  const pageSize = useParamStore((state) => state.pageSize);
-  const setParams = useParamStore((state) => state.setParams);
-  const orderBy = useParamStore((state) => state.orderBy);
-  const filterBy = useParamStore((state) => state.filterBy);
+  const pageSize = useParamsStore((state) => state.pageSize);
+  const setParams = useParamsStore((state) => state.setParams);
+  const orderBy = useParamsStore((state) => state.orderBy);
+  const filterBy = useParamsStore((state) => state.filterBy);
 
   return (
     <div className="flex justify-between items-center mb-4">
       <div>
         <span className="uppercase text-sm text-gray-500 mr-2">Filter by</span>
-        <ButtonGroup>
+        <Button.Group>
           {filterButtons.map(({ label, icon: Icon, value }) => (
             <Button
               key={value}
@@ -64,12 +64,12 @@ export default function Filters() {
               {label}
             </Button>
           ))}
-        </ButtonGroup>
+        </Button.Group>
       </div>
 
       <div>
         <span className="upparcase text-sm text-gray-500 mr-2">Odred By:</span>
-        <ButtonGroup>
+        <Button.Group>
           {orderButtons.map(({ label, icon: Icon, value }) => (
             <Button
               key={value}
@@ -80,12 +80,12 @@ export default function Filters() {
               {label}
             </Button>
           ))}
-        </ButtonGroup>
+        </Button.Group>
       </div>
 
       <div>
         <span className="upparcase text-sm text-gray-500 mr-2">Page size:</span>
-        <ButtonGroup>
+        <Button.Group>
           {pageSizeButtons.map((value, i) => (
             <Button
               key={i}
@@ -96,7 +96,7 @@ export default function Filters() {
               {value}
             </Button>
           ))}
-        </ButtonGroup>
+        </Button.Group>
       </div>
     </div>
   );
